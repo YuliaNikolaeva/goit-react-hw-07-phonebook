@@ -16,7 +16,7 @@ const Button = ({ onClick, contactId }) => {
 
 Button.propTypes = {
     onClick: PropTypes.func,
-    contactId: PropTypes.string,
+    contactId: PropTypes.number,
 };
 
 export default Button;

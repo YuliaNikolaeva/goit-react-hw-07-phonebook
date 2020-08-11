@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import contactActions from '../../redux/contacts/contacts-actions';
+import contactOperation from '../../redux/contacts/contacts-operations';
 import Button from '../Buttons';
 import s from './ContactsList.module.css';
+
+const {deleteContact} = contactOperation;
 
 const ContactsList = ({ contacts, onclickBtn }) => {
     return (
@@ -22,6 +24,7 @@ const ContactsList = ({ contacts, onclickBtn }) => {
 };
 
 const mapStateToProps = state => {
+    // console.log('111-state', state.contacts)
     const { items, filter } = state.contacts;
     const normalizerFilter = filter.toLocaleLowerCase();
 
@@ -35,13 +38,13 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    onclickBtn: id => dispatch(contactActions.deleteContact(id)),
+    onclickBtn: id => dispatch(deleteContact(id)),
 });
 
 ContactsList.propTypes = {
     contacts: PropTypes.arrayOf(
         PropTypes.shape({
-            id: PropTypes.string,
+            id: PropTypes.number,
             name: PropTypes.string,
             number: PropTypes.string,
         }).isRequired,
@@ -50,3 +53,5 @@ ContactsList.propTypes = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactsList);
+
+// export default connect(mapStateToProps)(ContactsList);

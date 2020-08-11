@@ -9,7 +9,17 @@ import ContactsList from './components/ContactsList';
 import Filter from './components/Filter';
 import Message from './components/Message';
 
+import contactOperations from './redux/contacts/contacts-operations';
+
+const {fetchContacts} = contactOperations;
+
 class App extends Component {
+
+    componentDidMount() {
+        this.props.getAllContacts();
+    };
+
+    
     render() {
         const { contacts } = this.props;
 
@@ -32,10 +42,14 @@ class App extends Component {
     }
 }
 
+const mapDispatchToProps = dispatch => ({
+    getAllContacts: () => dispatch(fetchContacts()),
+})
+
 const mapStateToProps = state => {
     return {
         contacts: state.contacts.items,
     };
 };
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
