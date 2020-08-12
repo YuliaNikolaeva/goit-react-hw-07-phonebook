@@ -3,9 +3,14 @@ import { connect } from 'react-redux';
 import contactOperations from '../../redux/contacts/contacts-operations';
 import PropTypes from 'prop-types';
 
+import contactSelectors from '../../redux/contacts/contacts-selectors';
+
 import { v4 as uuidv4 } from 'uuid';
 
 import s from './ContactForm.module.css';
+
+const {getContacts} = contactSelectors;
+
 
 class ContactForm extends Component {
     state = {
@@ -97,7 +102,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => {
     return {
-        contacts: state.contacts.items,
+        contacts: getContacts(state),
     };
 };
 

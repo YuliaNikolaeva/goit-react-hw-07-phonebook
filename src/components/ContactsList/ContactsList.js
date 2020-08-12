@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import contactOperation from '../../redux/contacts/contacts-operations';
 import Button from '../Buttons';
 import s from './ContactsList.module.css';
+import contactSelectors from '../../redux/contacts/contacts-selectors';
 
 const {deleteContact} = contactOperation;
+const {getVisibleContacts} = contactSelectors;
 
 const ContactsList = ({ contacts, onclickBtn }) => {
     return (
@@ -23,19 +25,9 @@ const ContactsList = ({ contacts, onclickBtn }) => {
     );
 };
 
-const mapStateToProps = state => {
-    // console.log('111-state', state.contacts)
-    const { items, filter } = state.contacts;
-    const normalizerFilter = filter.toLocaleLowerCase();
-
-    const visibleContacts = items.filter(contact =>
-        contact.name.toLocaleLowerCase().includes(normalizerFilter),
-    );
-
-    return {
-        contacts: visibleContacts,
-    };
-};
+const mapStateToProps = state => ({
+    contacts: getVisibleContacts(state),
+});
 
 const mapDispatchToProps = dispatch => ({
     onclickBtn: id => dispatch(deleteContact(id)),
@@ -53,5 +45,3 @@ ContactsList.propTypes = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactsList);
-
-// export default connect(mapStateToProps)(ContactsList);

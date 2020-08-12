@@ -11,8 +11,11 @@ import Filter from './components/Filter';
 import Message from './components/Message';
 
 import contactOperations from './redux/contacts/contacts-operations';
+import contactSelectors from './redux/contacts/contacts-selectors';
 
 const {fetchContacts} = contactOperations;
+
+const {getContacts, getLoading} = contactSelectors;
 
 class App extends Component {
 
@@ -22,7 +25,7 @@ class App extends Component {
 
     
     render() {
-        const { contacts } = this.props;
+        const { contacts, isLoadingContacts } = this.props;
 
         return (
             <div className={s.page__wrapper}>
@@ -35,13 +38,13 @@ class App extends Component {
                     {this.props.isLoadingContacts && <Loader
                         type="Puff"
                         color="#666464"
-                        height={100}
-                        width={100}
+                        height={60}
+                        width={60}
                     />}
                     {contacts.length > 0 ? (
                         <ContactsList />
                     ) : (
-                        !this.props.isLoadingContacts &&
+                        !isLoadingContacts &&
                         <Message text={'Phonebook is empty'} />
                     )}
                 </Container>
@@ -56,8 +59,8 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => {
     return {
-        contacts: state.contacts.items,
-        isLoadingContacts: state.contacts.loading,
+        contacts: getContacts(state),
+        isLoadingContacts: getLoading(state),
     };
 };
 
