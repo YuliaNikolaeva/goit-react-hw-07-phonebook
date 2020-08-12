@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Loader from 'react-loader-spinner';
 
 import s from './App.module.css';
 
@@ -25,15 +26,22 @@ class App extends Component {
 
         return (
             <div className={s.page__wrapper}>
+
                 <Container title={'Phonebook'}>
                     {contacts.length > 1 && <Filter />}
                     <ContactForm />
                 </Container>
-
                 <Container title={'Contacts'}>
+                    {this.props.isLoadingContacts && <Loader
+                        type="Puff"
+                        color="#666464"
+                        height={100}
+                        width={100}
+                    />}
                     {contacts.length > 0 ? (
                         <ContactsList />
                     ) : (
+                        !this.props.isLoadingContacts &&
                         <Message text={'Phonebook is empty'} />
                     )}
                 </Container>
@@ -49,6 +57,7 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => {
     return {
         contacts: state.contacts.items,
+        isLoadingContacts: state.contacts.loading,
     };
 };
 

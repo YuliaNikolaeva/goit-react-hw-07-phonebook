@@ -22,12 +22,12 @@ const fetchContacts = () => dispatch => {
     .catch(err => dispatch(fetchContactsError(err)))
 };
 
-console.log(222, `http://localhost:2000/contacts/2`)
 
-const addContact= contact => dispatch => {
+
+const addContact= ({name, number}) => dispatch => {
     const newContact = {
-        name: contact.name,
-        number: contact.number,
+        name,
+        number,
     };
 
     dispatch(addContactRequest())
