@@ -14,7 +14,7 @@ const getVisibleContacts = createSelector(
             .includes(normalizerFilter)
         );
     },
-)
+);
 
 
 export default {

@@ -18,7 +18,6 @@ const {
 const items = createReducer([], {
     [fetchContactsSuccess]: (_,  { payload }) => payload,
 
-
     [addContactSuccess]: (state, { payload }) => [
         ...state,
         payload,
@@ -50,6 +49,7 @@ const error = createReducer(null, {
     [addContactContactsError]: (_, {payload}) => payload,
     [deleteContactError]:  (_, {payload}) => payload,
 });
+
 
 export default combineReducers({
     items,

@@ -6,4 +6,5 @@ const Message = ({ text }) => {
     return <div className={s.message}>{text}</div>;
 };
 
+
 export default Message;

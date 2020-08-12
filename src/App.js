@@ -10,8 +10,7 @@ import ContactsList from './components/ContactsList';
 import Filter from './components/Filter';
 import Message from './components/Message';
 
-import contactOperations from './redux/contacts/contacts-operations';
-import contactSelectors from './redux/contacts/contacts-selectors';
+import {contactOperations, contactSelectors} from './redux/contacts';
 
 const {fetchContacts} = contactOperations;
 
@@ -23,7 +22,6 @@ class App extends Component {
         this.props.getAllContacts();
     };
 
-    
     render() {
         const { contacts, isLoadingContacts } = this.props;
 
@@ -63,5 +61,6 @@ const mapStateToProps = state => {
         isLoadingContacts: getLoading(state),
     };
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -15,6 +15,7 @@ const deleteContactError = createAction('contacts/deleteContactError');
 
 const changeFilter = createAction('contacts/Filter');
 
+
 export default { 
     fetchContactsRequest,
     fetchContactsSuccess,

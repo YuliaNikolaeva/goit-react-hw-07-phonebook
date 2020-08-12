@@ -23,7 +23,6 @@ const fetchContacts = () => dispatch => {
 };
 
 
-
 const addContact= ({name, number}) => dispatch => {
     const newContact = {
         name,
@@ -37,6 +36,7 @@ const addContact= ({name, number}) => dispatch => {
     .catch(err => dispatch(addContactContactsError(err)))
 };
 
+
 const deleteContact = id => dispatch => {
     dispatch(deleteContactRequest());
 
@@ -44,6 +44,7 @@ const deleteContact = id => dispatch => {
     .then(() => dispatch(deleteContactSuccess(id)))
     .catch(err => dispatch(deleteContactError(err)))
 }
+
 
 export default { 
     fetchContacts,
